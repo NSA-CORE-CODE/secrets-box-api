@@ -13,18 +13,16 @@ app.get("/secrets-box/api", async (req, res) => {
   const { role } = req.body;
 
   if (!role) {
-    res.status(401).send({
+    return res.status(401).send({
       error: `Expected role, got ${role}`,
     });
-    res.end();
   }
 
   const isValidRole = validateRole(role);
 
   if (!isValidRole) {
     const error = await getAccountCredentials(role);
-    res.status(401).send({ ...error });
-    return;
+    return res.status(401).send({ ...error });
   }
 
   const credentials = await getAccountCredentials(role);
