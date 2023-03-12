@@ -2,6 +2,8 @@ const cors = require("cors");
 const express = require("express");
 const validateRole = require("./lib/role-validator");
 const { getAccountCredentials } = require("./lib/credentials-client");
+const {requestHandler}=require("./lib/middleware");
+const {invalidRole}=require("./lib/middleware");
 
 const app = express();
 
